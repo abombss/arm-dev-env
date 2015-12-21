@@ -10,7 +10,8 @@
         "storageSettings": "[parameters('storageSettings')]",
         "name": "[variables('storageSettings').name]",
         "location": "[variables('storageSettings').location]",
-        "type": "[variables('storageSettings').type]"
+        "type": "[variables('storageSettings').type]",
+        "apiVersion": "[providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]]"
     },
     "resources": [
         {
@@ -28,8 +29,8 @@
     ],
     "outputs": {
         "storageAccountInfo": {
-            "value": "[reference(concat('Microsoft.Storage/storageAccounts/', variables('name')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0])]",
-            "type": "object"
+            "type": "object",
+            "value": "[reference(concat('Microsoft.Storage/storageAccounts/', variables('name')), variables('apiVersion'))]"
         }
     }
 }
