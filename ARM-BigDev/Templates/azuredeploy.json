@@ -35,13 +35,14 @@
 
         "diagnosticStorageSettings": {
             "name": "[parameters('diagStorageName')]",
-            "resourceGroup": "parameters('diagStorageResourceGroup')",
+            "resourceGroup": "[parameters('diagStorageResourceGroup')]",
             "location": "[parameters('location')]",
             "type": "[parameters('diagStorageType')]"
         }
     },
     "resources": [
         {
+            "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
             "name": "vm-diagnostic-storage",
             "properties": {
@@ -55,8 +56,7 @@
                         "value": "[variables('diagnosticStorageSettings')]"
                     }
                 }
-            },
-            "type": "Microsoft.Resources/deployments"
+            }
         }
     ],
     "outputs": {
